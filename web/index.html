@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Probar API rest</title>
+  <script type="module">
+    fetch('http://localhost:3000/movies')
+    .then(response => response.json())
+    .then(movies=>{
+      console.log(movies)
+      const html = movies.map(movie=>{
+        return `
+        <article data-id="${movie.id}">
+          <h2>${movie.title}</h2>
+          <p>${movie.director}</p>
+        </article>
+        `
+      }).join(' ')
+      document.querySelector('#main').innerHTML = html
+    })
+    .catch(err  => console.log('Hubo un error en el fetch', err.message))
+  </script>
+</head>
+<body>
+  <div id="main">
+
+  </div>
+</body>
+</html>
